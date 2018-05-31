@@ -1,3 +1,6 @@
-# Few_Line_Code_Attacks
+# Rose Attack
 
-A set of Network attacks written in Python using Scapy library
+Sending multiple fragmented packets with escaped offsets (missing fragmented packets) in order to simulate the Rose Attack
+
+# Example : 
+``` RoseAttack("192.168.254.25","eth0",80)
