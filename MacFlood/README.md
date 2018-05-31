@@ -1,3 +1,5 @@
-# Few_Line_Code_Attacks
+# Mac Flood Attack
 
-A set of Network attacks written in Python using Scapy library
+ Sending a flood of IP packets with random IP and MAC addresses in order to overload the target MAC table
+# Example :
+MacFlood("eth0",100000)
