@@ -15,8 +15,7 @@ def DoubleTagging(Ip,Interface,MacDestAdd,TargetVlanTag):
     sendp(Ether(dst=MacDestAdd)/Dot1Q(vlan=1)/Dot1Q(vlan=TargetVlanTag)/
                     IP(dst=Ip)/ICMP(),iface=Interface,verbose=0)
 
-    #Clear imported modules in order to prevent "next import" issue
-    sys.modules.clear()
+   
     return 0
 
 
@@ -32,8 +31,7 @@ def Spoofing(Ip,Interface,MacDestAdd,TargetVlanTag):
     time.sleep(30)
     dtp.negotiate_trunk(iface=Interface,verbose=0)
 
-    #Clear imported modules in order to prevent "next import" issue
-    sys.modules.clear()
+
     return 0
 
 

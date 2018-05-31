@@ -36,8 +36,6 @@ def RoseAttack(Ip,Interface,D_Port):
         i.id+=23
         i.frag=0
 
-        #Clear imported modules in order to prevent "next import" issue
-        sys.modules.clear()
 
     return 007
 

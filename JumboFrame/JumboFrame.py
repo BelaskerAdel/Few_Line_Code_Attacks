@@ -19,7 +19,6 @@ def JumboFrame(Ip,Interface,mtu):
     current_mtu=commands.getstatusoutput("cat /sys/class/net/"+Interface+"/mtu")[1]
     #set the required jumbo mtu
     commands.getstatusoutput("ifconfig "+Interface+" mtu "+str(mtu)+" up")
-## !!! !!! add this line "Ether(ethertype=0x8870)/" in order to specify that we sent jumbo frame
 
     ans,uans=sr(Ether(type=0x8870)/IP(dst=Ip)/ICMP()/Raw(load="a"*(mtu-28)),timeout=1,iface=Interface,verbose=0)
     ansPck_nbr=len(ans)
@@ -27,8 +26,7 @@ def JumboFrame(Ip,Interface,mtu):
     #reset the old MTU
     commands.getstatusoutput("ifconfig "+Interface+" mtu "+str(current_mtu)+" up")
 
-    #Clear imported modules in order to prevent "next import" issue
-    sys.modules.clear()
+
     return ansPck_nbr
 
 

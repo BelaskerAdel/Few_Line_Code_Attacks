@@ -20,8 +20,7 @@ def TinyFragmentAttack(Ip,Interface,PckNmb):
 
     send(p,iface=Interface,verbose=0)
 
-    #Clear imported modules in order to prevent "next import" issue
-    sys.modules.clear()
+
     return 0
 
 # Sending a storm of UDP fragmented packets
@@ -35,8 +34,6 @@ def StormFragmentAttack(Ip,Interface,PckNmb):
 
     send(p,iface=Interface,verbose=0)
 
-    #Clear imported modules in order to prevent "next import" issue
-    sys.modules.clear()
     return 0
 
 # Sending multiple fragmented packets with overlpped offsets (wrong offsets) , it may cause a system crash
@@ -51,11 +48,5 @@ def TinyOverlappingFragmentAttack(Ip,Interface,PckNmb):
     p.flags=0
 
     send(p,iface=Interface,verbose=0)
-
-
-    #Clear imported modules in order to prevent "next import" issue
-    sys.modules.clear()
-
-
 
     return 0

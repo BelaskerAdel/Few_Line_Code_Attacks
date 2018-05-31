@@ -26,8 +26,7 @@ def TearDrop(Ip,Interface):
     i.frag=offset
     send(i/load,verbose=0,iface=Interface)
 
-    #Clear imported modules in order to prevent "next import" issue
-    sys.modules.clear()
+ 
     return 007
 
 
