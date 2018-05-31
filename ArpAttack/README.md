@@ -1,3 +1,6 @@
-# Few_Line_Code_Attacks
+# Arp Attack/Poisining
 
-A set of Network attacks written in Python using Scapy library
+# Example 
+ArpAttack("192.168.254.25","wlan0","192.168.254.1","11:22:33:44:55:66") .
+CTRL-C to stop the attack and restore the network to its previous state
+
