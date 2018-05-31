@@ -1,3 +1,6 @@
-# Few_Line_Code_Attacks
+# Fragment Attack
+This code includes 3 types of fragment attacks : TinyFragmentAttack, StormFragmentAttack and TinyOverlappingFragmentAttack .
+<br/>
+# Example :
 
-A set of Network attacks written in Python using Scapy library
+TinyOverlappingFragmentAttack("192.168.254.25","wlan0",1000)
