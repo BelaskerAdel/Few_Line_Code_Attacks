@@ -1,4 +1,16 @@
-#!usr/bin/env python
+#!/usr/bin/env python
+"""Jumbo-frame / MTU manipulation probe.
+
+EDUCATIONAL / AUTHORIZED-TESTING USE ONLY. Run only inside an isolated lab
+network you own, or with explicit written permission. See this folder's
+README.md for how the technique works and, more importantly, how to detect
+and defend against it.
+
+Note: this is legacy student code kept as an original reference. It was
+written for Python 2 and an isolated Linux lab; adapt it to your own
+authorized environment before use.
+"""
+
 import sys
 from scapy.all import *
 #only for linux and python < 3
