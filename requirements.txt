@@ -1,0 +1,2 @@
+scapy>=2.5.0
+python-nmap>=0.7.1  # only needed for OsDiscovery
